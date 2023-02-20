@@ -2,8 +2,13 @@ cmake_minimum_required(VERSION 3.10.2)
 
 project(Particle-Life)
 
-add_executable(${PROJECT_NAME} ./src/main.cpp ./src/particle.cpp ./deps/glad.c) 
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+add_subdirectory(./deps/glfw/)
 
-target_include_directories(${PROJECT_NAME} PUBLIC ./src/include ./deps/include/)
+add_executable(${PROJECT_NAME} ./src/main.cpp ./src/particle.cpp ./deps/glad.c)
 
-target_link_libraries(${PROJECT_NAME} glfw GL X11 pthread Xrandr Xi dl)
+target_include_directories(${PROJECT_NAME} PUBLIC ./src/include ./deps/include/ ./deps/glfw/include)
+
+target_link_libraries(${PROJECT_NAME} glfw) # GL X11 pthread Xrandr Xi dl)
